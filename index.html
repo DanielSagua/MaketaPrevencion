@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sociedad de Profesionales Prevencionistas | Sitio Informativo</title>
+    <meta name="description"
+        content="Sociedad de profesionales en prevención de riesgos. Asesorías, auditorías, capacitaciones y cumplimiento normativo." />
+
+    <!-- Google Font (opcional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Paleta “seguridad + confianza” */
+            --bg: #0B1220;
+            /* fondo oscuro */
+            --surface: #0F1B33;
+            /* tarjetas */
+            --surface2: #122149;
+            /* tarjetas hover */
+            --text: #EAF0FF;
+            /* texto principal */
+            --muted: #A8B3CF;
+            /* texto secundario */
+            --line: #263A68;
+            /* bordes */
+            --brand: #2E7CF6;
+            /* azul confianza */
+            --accent: #19C37D;
+            /* verde prevención */
+            --warn: #F7B84B;
+            /* acento secundario */
+            --white: #ffffff;
+
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --max: 1150px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(1000px 700px at 10% 10%, rgba(46, 124, 246, .18), transparent 55%),
+                radial-gradient(800px 600px at 90% 20%, rgba(25, 195, 125, .14), transparent 55%),
+                radial-gradient(900px 800px at 50% 100%, rgba(247, 184, 75, .10), transparent 60%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(11, 18, 32, .55);
+            border-bottom: 1px solid rgba(38, 58, 104, .45);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 240px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            box-shadow: 0 10px 25px rgba(46, 124, 246, .20);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo:after {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: rgba(255, 255, 255, .18);
+            transform: rotate(25deg);
+        }
+
+        .brand strong {
+            font-weight: 700;
+            letter-spacing: .2px;
+        }
+
+        .brand span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .links a {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 10px;
+            border-radius: 12px;
+        }
+
+        .links a:hover {
+            color: var(--text);
+            background: rgba(38, 58, 104, .35);
+        }
+
+        .cta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform .12s ease, background .12s ease, border-color .12s ease;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(46, 124, 246, .95), rgba(46, 124, 246, .65));
+            border-color: rgba(46, 124, 246, .35);
+            box-shadow: 0 12px 30px rgba(46, 124, 246, .22);
+        }
+
+        .btn-ghost {
+            background: rgba(15, 27, 51, .65);
+            border-color: rgba(38, 58, 104, .55);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(18, 33, 73, .75);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 58px 0 26px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 26px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .links {
+                display: none;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+        }
+
+        .hero-card {
+            border: 1px solid rgba(38, 58, 104, .55);
+            background: linear-gradient(180deg, rgba(15, 27, 51, .85), rgba(15, 27, 51, .55));
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 26px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-card:before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -220px;
+            top: -220px;
+            background: radial-gradient(circle at 30% 30%, rgba(25, 195, 125, .35), transparent 55%);
+            filter: blur(0px);
+        }
+
+        .kicker {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(25, 195, 125, .12);
+            border: 1px solid rgba(25, 195, 125, .25);
+            color: #B9F6DD;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: .2px;
+        }
+
+        h1 {
+            margin: 14px 0 10px;
+            font-size: clamp(28px, 3.2vw, 44px);
+            line-height: 1.12;
+            letter-spacing: -.7px;
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 15px;
+            max-width: 58ch;
+            margin: 0 0 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 520px) {
+            .mini-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat {
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: rgba(18, 33, 73, .55);
+            border: 1px solid rgba(38, 58, 104, .55);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* Side panel */
+        .side {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .panel {
+            border-radius: var(--radius);
+            padding: 18px;
+            border: 1px solid rgba(38, 58, 104, .55);
+            background: rgba(15, 27, 51, .65);
+            box-shadow: var(--shadow);
+        }
+
+        .panel h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .panel p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .checklist {
+            margin: 10px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .checklist li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(38, 58, 104, .45);
+            background: rgba(18, 33, 73, .35);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            margin-top: 6px;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(25, 195, 125, .10);
+            flex: 0 0 auto;
+        }
+
+        .checklist b {
+            display: block;
+            font-size: 13px;
+        }
+
+        .checklist small {
+            color: var(--muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Sections */
+        section {
+            padding: 28px 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: -.2px;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            max-width: 60ch;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            border-radius: var(--radius);
+            border: 1px solid rgba(38, 58, 104, .55);
+            background: rgba(15, 27, 51, .70);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            transition: transform .12s ease, background .12s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            background: rgba(18, 33, 73, .75);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid rgba(38, 58, 104, .6);
+            color: var(--muted);
+            background: rgba(18, 33, 73, .35);
+        }
+
+        .icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: rgba(46, 124, 246, .12);
+            border: 1px solid rgba(46, 124, 246, .25);
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 8px 0 6px;
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .card .link {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 12px;
+            color: #CFE0FF;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .card .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Split layout */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 980px) {
+            .split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Team */
+        .people {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .people {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .person {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 14px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(38, 58, 104, .55);
+            background: rgba(15, 27, 51, .70);
+            box-shadow: var(--shadow);
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(25, 195, 125, .8), rgba(46, 124, 246, .8));
+            border: 1px solid rgba(255, 255, 255, .12);
+            flex: 0 0 auto;
+        }
+
+        .person b {
+            display: block;
+            font-size: 14px;
+        }
+
+        .person span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* Form */
+        form {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 680px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(38, 58, 104, .65);
+            background: rgba(11, 18, 32, .55);
+            color: var(--text);
+            outline: none;
+            font: inherit;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: rgba(46, 124, 246, .65);
+            box-shadow: 0 0 0 4px rgba(46, 124, 246, .16);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .fineprint {
+            color: var(--muted);
+            font-size: 12px;
+            margin: 10px 0 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 26px 0 40px;
+            border-top: 1px solid rgba(38, 58, 104, .45);
+            color: var(--muted);
+        }
+
+        .foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .foot small {
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* WhatsApp Floating Button */
+        .wa {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 80;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 999px;
+            background: rgba(25, 195, 125, .95);
+            color: #082015;
+            font-weight: 800;
+            box-shadow: 0 14px 35px rgba(25, 195, 125, .22);
+            border: 1px solid rgba(255, 255, 255, .18);
+            transform: translateY(0);
+            transition: transform .12s ease;
+        }
+
+        .wa:hover {
+            transform: translateY(-2px);
+        }
+
+        .wa svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Smooth anchors */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="nav">
+                <a class="brand" href="#inicio" aria-label="Ir al inicio">
+                    <div class="logo" aria-hidden="true"></div>
+                    <div>
+                        <strong>Sociedad Prevencionista</strong>
+                        <span>Prevención de riesgos • Cumplimiento • Cultura de seguridad</span>
+                    </div>
+                </a>
+
+                <nav class="links" aria-label="Navegación principal">
+                    <a href="#servicios">Servicios</a>
+                    <a href="#metodologia">Metodología</a>
+                    <a href="#equipo">Equipo</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+
+                <div class="cta">
+                    <a class="btn btn-ghost" href="#contacto">Solicitar cotización</a>
+                    <a class="btn btn-primary" href="#servicios">Ver servicios</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <div class="container hero">
+            <div class="hero-grid">
+                <div class="hero-card">
+                    <div class="kicker">✅ Enfoque profesional • Respuesta rápida • Documentación completa</div>
+                    <h1>Prevención de riesgos con estándar profesional para empresas que buscan cumplimiento y seguridad
+                        real.</h1>
+                    <p class="lead">
+                        Asesorías, auditorías, capacitaciones y acompañamiento técnico. Diseñamos planes claros,
+                        evidenciables y
+                        alineados a normativa, reduciendo incidentes y mejorando la cultura de seguridad.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#contacto">Cotizar ahora</a>
+                        <a class="btn btn-ghost" href="#metodologia">Cómo trabajamos</a>
+                    </div>
+
+                    <div class="mini-stats" aria-label="Indicadores de confianza">
+                        <div class="stat">
+                            <strong>Planes & evidencias</strong>
+                            <span>Documentación y seguimiento</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Diagnóstico inicial</strong>
+                            <span>Brechas y prioridades</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Soporte continuo</strong>
+                            <span>Canal directo y trazabilidad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="side">
+                    <div class="panel">
+                        <h3>¿Qué obtienes desde la primera semana?</h3>
+                        <p>Una ruta clara: diagnóstico → plan → implementación → control.</p>
+
+                        <ul class="checklist">
+                            <li>
+                                <span class="dot" aria-hidden="true"></span>
+                                <div>
+                                    <b>Evaluación de brechas</b>
+                                    <small>Levantamiento rápido, prioridades y riesgos críticos.</small>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dot" aria-hidden="true"></span>
+                                <div>
+                                    <b>Plan de acción ejecutable</b>
+                                    <small>Con responsables, fechas y evidencias.</small>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dot" aria-hidden="true"></span>
+                                <div>
+                                    <b>Capacitación & acompañamiento</b>
+                                    <small>Para líderes y equipos operativos.</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Atención rápida</h3>
+                        <p>Formulario + WhatsApp para contacto inmediato.</p>
+                        <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+                            <a class="btn btn-ghost" href="#contacto">Formulario</a>
+                            <a class="btn btn-primary" href="#contacto"
+                                onclick="document.getElementById('nombre').focus()">Cotizar</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <section id="servicios">
+            <div class="container">
+                <div class="section-title">
+                    <div>
+                        <h2>Servicios principales</h2>
+                        <p>Ofrecemos un catálogo claro y medible. Puedes partir con un diagnóstico o un plan anual.</p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <article class="card">
+                        <div class="icon" aria-hidden="true">🛡️</div>
+                        <span class="pill">Asesoría & cumplimiento</span>
+                        <h3>Gestión preventiva integral</h3>
+                        <p>Implementación de programas, procedimientos, y seguimiento con evidencias y trazabilidad.</p>
+                        <a class="link" href="#contacto">Solicitar cotización →</a>
+                    </article>
+
+                    <article class="card">
+                        <div class="icon" aria-hidden="true">📋</div>
+                        <span class="pill">Diagnóstico & auditoría</span>
+                        <h3>Auditorías / brechas</h3>
+                        <p>Revisión documental y en terreno para detectar brechas y definir prioridades por criticidad.
+                        </p>
+                        <a class="link" href="#contacto">Solicitar cotización →</a>
+                    </article>
+
+                    <article class="card">
+                        <div class="icon" aria-hidden="true">🎓</div>
+                        <span class="pill">Capacitación</span>
+                        <h3>Capacitaciones prácticas</h3>
+                        <p>Charlas y talleres para líderes y equipos, con enfoque operacional y cultura de seguridad.
+                        </p>
+                        <a class="link" href="#contacto">Solicitar cotización →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodologia">
+            <div class="container">
+                <div class="section-title">
+                    <div>
+                        <h2>Metodología de trabajo</h2>
+                        <p>Un flujo simple y profesional para asegurar resultados: diagnóstico → plan → implementación →
+                            control.</p>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="card">
+                        <span class="pill">Paso 1</span>
+                        <h3>Diagnóstico inicial</h3>
+                        <p>Recolección de información, revisión documental y visita (si aplica) para mapear brechas y
+                            riesgos.</p>
+                    </div>
+                    <div class="card">
+                        <span class="pill">Paso 2</span>
+                        <h3>Plan de acción</h3>
+                        <p>Entregables con responsables, plazos, evidencias y priorización por criticidad.</p>
+                    </div>
+                    <div class="card">
+                        <span class="pill">Paso 3</span>
+                        <h3>Implementación</h3>
+                        <p>Apoyo en procedimientos, matrices, capacitación, comunicación interna y control operacional.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="pill">Paso 4</span>
+                        <h3>Seguimiento & mejora</h3>
+                        <p>Reuniones de avance, KPIs, hallazgos, planes correctivos y trazabilidad para auditoría.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipo">
+            <div class="container">
+                <div class="section-title">
+                    <div>
+                        <h2>Equipo</h2>
+                        <p>Presentación breve (puedes reemplazar por nombres reales, credenciales y especialidades).</p>
+                    </div>
+                </div>
+
+                <div class="people">
+                    <div class="person">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <div>
+                            <b>Profesional 1</b>
+                            <span>Auditorías • Sistemas de gestión • Terreno</span>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <div>
+                            <b>Profesional 2</b>
+                            <span>Capacitaciones • Cultura • Liderazgo</span>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <div>
+                            <b>Profesional 3</b>
+                            <span>Documentación • Cumplimiento • KPI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <div class="section-title">
+                    <div>
+                        <h2>Contacto y cotización</h2>
+                        <p>Maqueta del formulario. En producción se conecta a un backend (correo/DB) + antispam.</p>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="card">
+                        <span class="pill">Escríbenos</span>
+                        <form onsubmit="return mockSubmit(event)">
+                            <div class="row">
+                                <label>
+                                    Nombre
+                                    <input id="nombre" name="nombre" placeholder="Tu nombre" required />
+                                </label>
+                                <label>
+                                    Empresa
+                                    <input name="empresa" placeholder="Nombre de la empresa" />
+                                </label>
+                            </div>
+
+                            <div class="row">
+                                <label>
+                                    Correo
+                                    <input type="email" name="correo" placeholder="tu@correo.com" required />
+                                </label>
+                                <label>
+                                    Teléfono
+                                    <input name="telefono" placeholder="+56 9 1234 5678" />
+                                </label>
+                            </div>
+
+                            <div class="row">
+                                <label>
+                                    Servicio
+                                    <select name="servicio">
+                                        <option value="diagnostico">Diagnóstico / Brechas</option>
+                                        <option value="asesoria">Asesoría integral</option>
+                                        <option value="capacitacion">Capacitación</option>
+                                        <option value="auditoria">Auditoría</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Cantidad de trabajadores
+                                    <select name="dotacion">
+                                        <option>1–20</option>
+                                        <option>21–50</option>
+                                        <option>51–200</option>
+                                        <option>201+</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <label>
+                                Mensaje
+                                <textarea name="mensaje" placeholder="Cuéntanos brevemente tu necesidad..."></textarea>
+                            </label>
+
+                            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+                            <div class="fineprint" id="form-msg">
+                                Al enviar, aceptas que te contactemos para fines de cotización.
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <span class="pill">Datos (placeholder)</span>
+                        <h3>Canales de contacto</h3>
+                        <p style="margin-top:6px;">
+                            <b>Correo:</b> contacto@tusociedad.cl<br>
+                            <b>Horario:</b> Lun–Vie 09:00–18:00<br>
+                            <b>Cobertura:</b> Santiago y regiones (según proyecto)
+                        </p>
+
+                        <div style="height:12px"></div>
+
+                        <span class="pill">¿Por qué nosotros?</span>
+                        <p style="margin-top:10px;">
+                            Enfoque en trazabilidad, cumplimiento y resultados medibles: entregables claros, control de
+                            avances y soporte continuo.
+                        </p>
+
+                        <div style="height:14px"></div>
+
+                        <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container foot">
+                <div>
+                    <strong style="color:var(--text);">Sociedad Prevencionista</strong>
+                    <small>© <span id="year"></span> • Sitio informativo (maqueta)</small>
+                </div>
+                <div>
+                    <small>Privacidad • Términos • Contacto</small>
+                    <small style="opacity:.75;">Hecho para una imagen profesional y moderna.</small>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- WhatsApp flotante (reemplaza el número) -->
+    <a class="wa"
+        href="https://wa.me/569XXXXXXXX?text=Hola%2C%20vengo%20desde%20la%20web%20y%20quiero%20cotizar%20un%20servicio%20de%20prevenci%C3%B3n%20de%20riesgos."
+        target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path fill="currentColor"
+                d="M19.11 17.45c-.28-.14-1.65-.81-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.62.07-.28-.14-1.19-.44-2.27-1.41-.84-.75-1.41-1.67-1.58-1.95-.17-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49-.17-.01-.36-.01-.55-.01-.19 0-.5.07-.76.36-.26.28-1 1-1 2.44 0 1.43 1.03 2.82 1.17 3.01.14.19 2.03 3.11 4.92 4.36.69.3 1.22.48 1.64.62.69.22 1.32.19 1.82.12.55-.08 1.65-.67 1.88-1.32.23-.64.23-1.2.16-1.32-.07-.12-.26-.19-.55-.33z" />
+            <path fill="currentColor"
+                d="M16.02 3.2c-7.07 0-12.82 5.61-12.82 12.5 0 2.2.6 4.25 1.65 6.03L3 29l7.56-1.97c1.86 1 4 1.57 6.46 1.57 7.07 0 12.82-5.61 12.82-12.5S23.09 3.2 16.02 3.2zm0 22.8c-2.23 0-4.14-.6-5.78-1.66l-.41-.25-4.49 1.17 1.2-4.23-.27-.42c-1.13-1.72-1.73-3.62-1.73-5.51 0-5.6 4.74-10.15 10.56-10.15S26.58 9.5 26.58 15.1 21.84 26 16.02 26z" />
+        </svg>
+        WhatsApp
+    </a>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        function mockSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById("form-msg");
+            msg.textContent = "✅ Maqueta: aquí se enviaría el formulario (en producción se conecta a correo/DB).";
+            msg.style.color = "#B9F6DD";
+            return false;
+        }
+    </script>
+</body>
+
+</html>
