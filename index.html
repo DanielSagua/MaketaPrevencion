@@ -14,19 +14,20 @@
 
     <style>
         :root {
-            /* ✅ Paleta solicitada */
+            /* ✅ Paleta */
             --brand: #3C5C84;
-            /* azul */
             --accent: #297900;
-            /* verde */
             --warn: #F59E0B;
 
             --radius: 18px;
             --shadow: 0 12px 32px rgba(2, 6, 23, .08);
             --max: 1150px;
+
+            /* Mobile safe area */
+            --safeBottom: env(safe-area-inset-bottom, 0px);
         }
 
-        /* ===== THEME TOKENS (por defecto: claro) ===== */
+        /* ===== THEME TOKENS (default: light) ===== */
         :root {
             --bg: #F6F8FC;
             --paper: #FFFFFF;
@@ -35,7 +36,7 @@
             --muted: #475569;
             --line: #E2E8F0;
 
-            --header: rgba(246, 248, 252, .80);
+            --header: rgba(246, 248, 252, .86);
             --hover: rgba(60, 92, 132, .07);
 
             --kickerBg: rgba(41, 121, 0, .08);
@@ -45,7 +46,7 @@
             --statBg: rgba(60, 92, 132, .05);
             --statBd: rgba(60, 92, 132, .12);
 
-            --panelBg: rgba(255, 255, 255, .90);
+            --panelBg: rgba(255, 255, 255, .92);
             --cardBg: rgba(255, 255, 255, .92);
 
             --pillBd: rgba(60, 92, 132, .18);
@@ -59,7 +60,7 @@
             --focus: rgba(60, 92, 132, .14);
         }
 
-        /* ===== MODO OSCURO (con data-theme="dark") ===== */
+        /* ===== DARK ===== */
         html[data-theme="dark"] {
             --bg: #0B1220;
             --paper: #0F1B33;
@@ -68,7 +69,7 @@
             --muted: #A8B3CF;
             --line: rgba(38, 58, 104, .55);
 
-            --header: rgba(11, 18, 32, .60);
+            --header: rgba(11, 18, 32, .62);
             --hover: rgba(38, 58, 104, .35);
 
             --kickerBg: rgba(41, 121, 0, .14);
@@ -78,8 +79,8 @@
             --statBg: rgba(18, 33, 73, .55);
             --statBd: rgba(38, 58, 104, .55);
 
-            --panelBg: rgba(15, 27, 51, .75);
-            --cardBg: rgba(15, 27, 51, .70);
+            --panelBg: rgba(15, 27, 51, .80);
+            --cardBg: rgba(15, 27, 51, .74);
 
             --pillBd: rgba(38, 58, 104, .60);
             --pillBg: rgba(18, 33, 73, .35);
@@ -117,7 +118,7 @@
         }
 
         .container {
-            width: min(var(--max), calc(100% - 40px));
+            width: min(var(--max), calc(100% - 32px));
             margin: 0 auto;
         }
 
@@ -139,15 +140,22 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 0;
-            gap: 16px;
+            padding: 12px 0;
+            gap: 12px;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            min-width: 240px;
+            min-width: 0;
         }
 
         .logo {
@@ -158,6 +166,7 @@
             box-shadow: 0 10px 22px rgba(60, 92, 132, .18);
             position: relative;
             overflow: hidden;
+            flex: 0 0 auto;
         }
 
         .logo:after {
@@ -168,9 +177,19 @@
             transform: rotate(25deg);
         }
 
+        .brandText {
+            min-width: 0;
+        }
+
         .brand strong {
+            display: block;
             font-weight: 800;
             letter-spacing: .2px;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 45vw;
         }
 
         .brand span {
@@ -178,11 +197,15 @@
             color: var(--muted);
             font-size: 12px;
             margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 55vw;
         }
 
         .links {
             display: flex;
-            gap: 18px;
+            gap: 16px;
             align-items: center;
         }
 
@@ -203,6 +226,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex: 0 0 auto;
         }
 
         .btn {
@@ -241,56 +265,44 @@
             background: color-mix(in srgb, var(--brand) 6%, var(--paper));
         }
 
-        /* Toggle button */
-        .btn-toggle {
+        /* Icon buttons (mobile) */
+        .btn-icon {
             padding: 12px 12px;
             min-width: 44px;
         }
 
-        .btn-toggle svg {
+        .btn-icon svg {
             width: 18px;
             height: 18px;
         }
 
+        /* Mobile menu button */
+        .hamburger {
+            display: none;
+        }
+
         /* Hero */
         .hero {
-            padding: 52px 0 18px;
+            padding: 34px 0 14px;
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1.2fr .8fr;
-            gap: 18px;
+            gap: 16px;
             align-items: stretch;
-        }
-
-        @media (max-width: 980px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .links {
-                display: none;
-            }
-
-            .brand {
-                min-width: auto;
-            }
-
-            .cta {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-            }
         }
 
         .hero-card {
             border: 1px solid var(--line);
-            background: linear-gradient(180deg, color-mix(in srgb, var(--paper) 96%, transparent), color-mix(in srgb, var(--paper) 86%, transparent));
+            background: linear-gradient(180deg,
+                    color-mix(in srgb, var(--paper) 96%, transparent),
+                    color-mix(in srgb, var(--paper) 86%, transparent));
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 26px;
-            overflow: hidden;
+            padding: 22px;
             position: relative;
+            overflow: hidden;
         }
 
         .kicker {
@@ -309,7 +321,7 @@
 
         h1 {
             margin: 14px 0 10px;
-            font-size: clamp(28px, 3.2vw, 44px);
+            font-size: clamp(26px, 3.4vw, 44px);
             line-height: 1.12;
             letter-spacing: -.7px;
         }
@@ -317,28 +329,22 @@
         .lead {
             color: var(--muted);
             font-size: 15px;
-            max-width: 58ch;
-            margin: 0 0 18px;
+            max-width: 62ch;
+            margin: 0 0 16px;
         }
 
         .hero-actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 14px;
+            margin-top: 12px;
         }
 
         .mini-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-top: 18px;
-        }
-
-        @media (max-width: 520px) {
-            .mini-stats {
-                grid-template-columns: 1fr;
-            }
+            margin-top: 16px;
         }
 
         .stat {
@@ -362,7 +368,7 @@
         .side {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .panel {
@@ -425,7 +431,7 @@
 
         /* Sections */
         section {
-            padding: 26px 0;
+            padding: 22px 0;
         }
 
         .section-title {
@@ -433,7 +439,8 @@
             align-items: flex-end;
             justify-content: space-between;
             gap: 16px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
         }
 
         .section-title h2 {
@@ -446,7 +453,7 @@
             margin: 0;
             color: var(--muted);
             font-size: 13px;
-            max-width: 60ch;
+            max-width: 68ch;
         }
 
         .grid {
@@ -455,10 +462,11 @@
             gap: 14px;
         }
 
-        @media (max-width: 980px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            align-items: stretch;
         }
 
         .card {
@@ -527,30 +535,11 @@
             text-decoration: underline;
         }
 
-        .split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            align-items: stretch;
-        }
-
-        @media (max-width: 980px) {
-            .split {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Team */
         .people {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
-        }
-
-        @media (max-width: 980px) {
-            .people {
-                grid-template-columns: 1fr;
-            }
         }
 
         .person {
@@ -597,12 +586,6 @@
             gap: 10px;
         }
 
-        @media (max-width: 680px) {
-            .row {
-                grid-template-columns: 1fr;
-            }
-        }
-
         label {
             display: grid;
             gap: 6px;
@@ -644,7 +627,7 @@
 
         /* Footer */
         footer {
-            padding: 24px 0 40px;
+            padding: 22px 0 calc(40px + var(--safeBottom));
             border-top: 1px solid var(--line);
             color: var(--muted);
         }
@@ -653,7 +636,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 18px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
@@ -665,8 +648,8 @@
         /* WhatsApp Floating Button */
         .wa {
             position: fixed;
-            right: 18px;
-            bottom: 18px;
+            right: 14px;
+            bottom: calc(14px + var(--safeBottom));
             z-index: 80;
             display: flex;
             align-items: center;
@@ -689,6 +672,147 @@
             width: 18px;
             height: 18px;
         }
+
+        /* ===========================
+       ✅ BREAKPOINTS (RESPONSIVE)
+       =========================== */
+
+        /* Tablets */
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+            .people {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .brand strong {
+                max-width: 62vw;
+            }
+
+            .brand span {
+                max-width: 72vw;
+            }
+
+            .links {
+                display: none;
+            }
+
+            .cta {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+
+        /* Phones */
+        @media (max-width: 560px) {
+            .container {
+                width: calc(100% - 24px);
+            }
+
+            .logo {
+                width: 36px;
+                height: 36px;
+                border-radius: 12px;
+            }
+
+            .brand strong {
+                font-size: 14px;
+                max-width: 56vw;
+            }
+
+            .brand span {
+                font-size: 11px;
+                max-width: 56vw;
+            }
+
+            /* Mostrar hamburguesa */
+            .hamburger {
+                display: inline-flex;
+            }
+
+            /* Ocultar CTA grandes en header (se van al menú) */
+            .cta .btn-ghost:not(.btn-icon),
+            .cta .btn-primary {
+                display: none;
+            }
+
+            .hero-card {
+                padding: 18px;
+            }
+
+            .panel {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            /* WhatsApp compacto (solo icono) */
+            .wa span {
+                display: none;
+            }
+
+            .wa {
+                padding: 12px;
+            }
+        }
+
+        /* Mobile menu (drawer) */
+        .mobileMenu {
+            display: none;
+            border-top: 1px solid var(--line);
+            padding: 12px 0 14px;
+        }
+
+        .mobileMenu a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 12px;
+            border-radius: 14px;
+            margin: 6px 0;
+            border: 1px solid var(--line);
+            background: color-mix(in srgb, var(--paper) 85%, transparent);
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .mobileMenu a:hover {
+            background: var(--hover);
+        }
+
+        .mobileMenu .mobileCtas {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mobileMenu .btn {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -696,13 +820,15 @@
     <header>
         <div class="container">
             <div class="nav">
-                <a class="brand" href="#inicio" aria-label="Ir al inicio">
-                    <div class="logo" aria-hidden="true"></div>
-                    <div>
-                        <strong>Sociedad Prevencionista</strong>
-                        <span>Prevención de riesgos • Cumplimiento • Cultura de seguridad</span>
-                    </div>
-                </a>
+                <div class="left">
+                    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+                        <div class="logo" aria-hidden="true"></div>
+                        <div class="brandText">
+                            <strong>Sociedad Prevencionista</strong>
+                            <span>Prevención de riesgos • Cumplimiento • Cultura de seguridad</span>
+                        </div>
+                    </a>
+                </div>
 
                 <nav class="links" aria-label="Navegación principal">
                     <a href="#servicios">Servicios</a>
@@ -712,13 +838,36 @@
                 </nav>
 
                 <div class="cta">
-                    <!-- ✅ Botón modo claro/oscuro -->
-                    <button class="btn btn-ghost btn-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">
+                    <!-- Tema -->
+                    <button class="btn btn-ghost btn-icon" id="themeToggle" type="button" aria-label="Cambiar tema">
                         <span id="themeIcon" aria-hidden="true"></span>
                     </button>
 
+                    <!-- Menú móvil -->
+                    <button class="btn btn-ghost btn-icon hamburger" id="menuToggle" type="button"
+                        aria-label="Abrir menú">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+
+                    <!-- CTAs desktop -->
                     <a class="btn btn-ghost" href="#contacto">Solicitar cotización</a>
                     <a class="btn btn-primary" href="#servicios">Ver servicios</a>
+                </div>
+            </div>
+
+            <!-- Menú móvil desplegable -->
+            <div class="mobileMenu" id="mobileMenu" aria-label="Menú móvil">
+                <a href="#servicios" onclick="closeMobileMenu()">Servicios <span>›</span></a>
+                <a href="#metodologia" onclick="closeMobileMenu()">Metodología <span>›</span></a>
+                <a href="#equipo" onclick="closeMobileMenu()">Equipo <span>›</span></a>
+                <a href="#contacto" onclick="closeMobileMenu()">Contacto <span>›</span></a>
+
+                <div class="mobileCtas">
+                    <a class="btn btn-primary" href="#contacto" onclick="closeMobileMenu()">Cotizar ahora</a>
+                    <a class="btn btn-ghost" href="#servicios" onclick="closeMobileMenu()">Ver servicios</a>
                 </div>
             </div>
         </div>
@@ -957,11 +1106,11 @@
             <div class="container foot">
                 <div>
                     <strong style="color:var(--text);">Sociedad Prevencionista</strong>
-                    <small>© <span id="year"></span> • Tema claro/oscuro</small>
+                    <small>© <span id="year"></span> • Paleta #3C5C84 / #297900</small>
                 </div>
                 <div>
                     <small>Privacidad • Términos • Contacto</small>
-                    <small style="opacity:.85;">Paleta: #3C5C84 / #297900</small>
+                    <small style="opacity:.85;">Responsive listo para móvil</small>
                 </div>
             </div>
         </footer>
@@ -977,7 +1126,7 @@
             <path fill="currentColor"
                 d="M16.02 3.2c-7.07 0-12.82 5.61-12.82 12.5 0 2.2.6 4.25 1.65 6.03L3 29l7.56-1.97c1.86 1 4 1.57 6.46 1.57 7.07 0 12.82-5.61 12.82-12.5S23.09 3.2 16.02 3.2zm0 22.8c-2.23 0-4.14-.6-5.78-1.66l-.41-.25-4.49 1.17 1.2-4.23-.27-.42c-1.13-1.72-1.73-3.62-1.73-5.51 0-5.6 4.74-10.15 10.56-10.15S26.58 9.5 26.58 15.1 21.84 26 16.02 26z" />
         </svg>
-        WhatsApp
+        <span>WhatsApp</span>
     </a>
 
     <script>
@@ -1013,11 +1162,10 @@
             html.setAttribute("data-theme", theme);
             localStorage.setItem("theme", theme);
             const isDark = theme === "dark";
-            iconHolder.innerHTML = isDark ? ICON_SUN : ICON_MOON; // si está oscuro, muestro sol para volver a claro
+            iconHolder.innerHTML = isDark ? ICON_SUN : ICON_MOON;
             toggleBtn.setAttribute("aria-label", isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
         }
 
-        // Inicial: localStorage > sistema > claro
         const saved = localStorage.getItem("theme");
         if (saved === "dark" || saved === "light") {
             setTheme(saved);
@@ -1029,6 +1177,39 @@
         toggleBtn.addEventListener("click", () => {
             const current = html.getAttribute("data-theme") || "light";
             setTheme(current === "dark" ? "light" : "dark");
+        });
+
+        // ===== Menú móvil =====
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        function closeMobileMenu() {
+            mobileMenu.style.display = "none";
+            menuToggle.setAttribute("aria-label", "Abrir menú");
+            menuToggle.dataset.open = "0";
+            // devuelve el foco para accesibilidad
+            menuToggle.focus({ preventScroll: true });
+        }
+        window.closeMobileMenu = closeMobileMenu;
+
+        menuToggle.addEventListener("click", () => {
+            const isOpen = menuToggle.dataset.open === "1";
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                mobileMenu.style.display = "block";
+                menuToggle.setAttribute("aria-label", "Cerrar menú");
+                menuToggle.dataset.open = "1";
+            }
+        });
+
+        // Cerrar menú móvil al cambiar a desktop
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 560) {
+                mobileMenu.style.display = "none";
+                menuToggle.dataset.open = "0";
+                menuToggle.setAttribute("aria-label", "Abrir menú");
+            }
         });
     </script>
 </body>
